@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "F9mWZlqbbgf+46kwn0BCKg9oE4viB8uVU0biB65RYYD+8RIZYZZvRqUaRG8BI6wGAn7EgfV60vlAmj7VYzVSJQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\bmvsi-136\\source\\repos\\EncryptDecrypt\\EncryptDecrypt\\EncryptDecrypt.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\bmvsi-136\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

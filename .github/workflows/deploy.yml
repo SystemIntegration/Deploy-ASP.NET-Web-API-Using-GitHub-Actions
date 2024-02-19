@@ -1,0 +1,46 @@
+name: Deploy .NET
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build_deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+    steps:
+    - name: Checkout source code
+      uses: actions/checkout@v2
+    - uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+    - name: Run Unit Test
+      run:  dotnet test EncryptDecryptTest
+    - name: Publish
+      run:  dotnet publish EncryptDecrypt -o site
+    - name: Generate deployment package
+      run:  cd site && zip -r ../deploy.zip . -x '*.git*'
+    - name: Upload .NET to artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: dotnet-zip
+          path: deploy.zip
+    - name: Debug Environment Variables
+      run: |
+        echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+        echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
+        echo "AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION"
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+    - name: Upload deploy.zip to S3
+      run: |
+        aws s3 cp deploy.zip s3://{YOUR_BUCKET_NAME}/deploy.zip
+    - name: Deploy to EB
+      run: |
+        aws elasticbeanstalk create-application-version --application-name {YOUR_APP_NAME} --version-label $GITHUB_SHA --source-bundle S3Bucket={"YOUR_BUCKET_NAME"},S3Key="deploy.zip"
+        aws elasticbeanstalk update-environment --application-name {YOUR_APP_NAME} --environment-name {YOUR_ENV_NAME} --version-label $GITHUB_SHA
